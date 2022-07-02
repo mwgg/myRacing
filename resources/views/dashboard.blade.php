@@ -29,6 +29,9 @@
 <div class="card mt-4">
     <div class="card-body">
         <div class="calendar-container">
+            @if(count($schedules)===0)
+                <span>Nothing here, select what you are interested in on the <a href="{{ route('planner') }}">Planner</a> page</span>
+            @endif
             @foreach($schedules as $seriesId=>$s)
                 <div class="position-relative calendar-series">
                     <span class="series-logo-large series-logo calendar-series-logo" title="{{ $schedules[$seriesId][0]->series_name }}">
@@ -54,7 +57,7 @@
 </div>
 
 @if(count($tracksToBuy)>0)
-<div class="card mt-4">
+<div class="card mt-4 mb-4">
     <div class="card-body">
         <h4>{{ count($tracksToBuy) }} {{ (count($tracksToBuy)>1) ? 'tracks' : 'track' }} to be purchased:</h4>
         @foreach($tracksToBuy as $k=>$track)

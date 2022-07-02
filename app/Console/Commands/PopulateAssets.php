@@ -19,7 +19,7 @@ class PopulateAssets extends Command
      *
      * @var string
      */
-    protected $description = 'Populate/update series and track assets';
+    protected $description = 'Populate series and track assets.';
 
     /**
      * Execute the console command.

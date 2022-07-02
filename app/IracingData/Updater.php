@@ -157,7 +157,10 @@ class Updater
 
     private function downloadImageIfDoesntExist($url, $path)
     {
-        if(!file_exists($path))
+        $exists = file_exists($path);
+        $shouldUpdate = ($exists && time() - filemtime($path) > (86400 * 14) ); // If exists & modified > 14 days ago
+
+        if(!$exists || $shouldUpdate)
         {
             file_put_contents($path, file_get_contents($url));
         }
