@@ -32,34 +32,34 @@
             @if(count($schedules)===0)
                 <span>Nothing here, select what you are interested in on the <a href="{{ route('planner') }}">Planner</a> page</span>
             @endif
-    <div class="calendar-logos-container">
-            @foreach($schedules as $seriesId=>$s)
-                <div class="calendar-series">
-                    <div class="series-logo-large series-logo calendar-series-logo" title="{{ $schedules[$seriesId][0]->series_name }}">
-                        <img src="/img/series/{{ $seriesId }}.png"/>
+            <div class="calendar-logos-container">
+                @foreach($schedules as $seriesId=>$s)
+                    <div class="calendar-series">
+                        <div class="series-logo-large series-logo calendar-series-logo" title="{{ $schedules[$seriesId][0]->series_name }}">
+                            <img src="/img/series/{{ $seriesId }}.png"/>
+                        </div>
                     </div>
-                </div>
-            @endforeach
-    </div>
-    <div class="calendar-container inner-shadow">
-            @foreach($schedules as $seriesId=>$s)
-                <div class="calendar-series">
-                    @foreach($schedules[$seriesId] as $schedule)
-                        @if($schedule->race_week_num >= $schedule->current_week)
-                            <div class="calendar-week {{ ($schedule->current_week === $schedule->race_week_num) ? 'calendar-current-week' : '' }}">
-                                @include('layouts.track', [
-                                    'schedule' => $schedule,
-                                    'inactive' => true,
-                                    'muteNonFavorite' => true,
-                                    'ownership' => in_array($schedule->track_id, $ownedTracks)
-                                ])
-                            </div>
-                        @endif
-                    @endforeach
-                </div>
-            @endforeach
-            <div class="mb-1"></div>
-    </div>
+                @endforeach
+            </div>
+            <div class="calendar-outer inner-shadow"><div class="calendar-container">
+                @foreach($schedules as $seriesId=>$s)
+                    <div class="calendar-series">
+                        @foreach($schedules[$seriesId] as $schedule)
+                            @if($schedule->race_week_num >= $schedule->current_week)
+                                <div class="calendar-week {{ ($schedule->current_week === $schedule->race_week_num) ? 'calendar-current-week' : '' }}">
+                                    @include('layouts.track', [
+                                        'schedule' => $schedule,
+                                        'inactive' => true,
+                                        'muteNonFavorite' => true,
+                                        'ownership' => in_array($schedule->track_id, $ownedTracks)
+                                    ])
+                                </div>
+                            @endif
+                        @endforeach
+                    </div>
+                @endforeach
+                <div class="mb-2"></div>
+            </div></div>
         </div>
     </div>
 </div>

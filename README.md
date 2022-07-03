@@ -12,7 +12,7 @@ This is a work in progress.
 ## Why self-hosted?
 I would have loved to make this available as a public website, however there are a couple of reason for not doing so.
 
-First of all, I would prefer not to deal with storing user data at all. I also wanted myRacing to keep maintain the list of purchased race tracks automatically and that requires authentication with the user's login and password. Storing other people's iRacing credentials is not an option at all.
+First of all, I would prefer not to deal with storing user data at all. I also wanted myRacing to maintain the list of purchased race tracks automatically and that requires authentication with the user's login and password. Storing other people's iRacing credentials is not an option at all.
 
 ## Running myRacing
 
@@ -33,7 +33,6 @@ Rename `.env.example` to `.env`, configure the database and provide your iRacing
 ```
 DB_CONNECTION=sqlite
 DB_DATABASE=/path/to/myracing.db
-DB_FOREIGN_KEYS=true
 
 IRACING_USERNAME="yourusername"
 IRACING_PASSWORD="yourpassword"

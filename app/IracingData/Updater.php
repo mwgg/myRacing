@@ -26,6 +26,8 @@ class Updater
 
     public function populateSeries()
     {
+        echo "Updating series...";
+
         $series = $this->iracing->series->get();
 
         foreach($series as $s)
@@ -40,10 +42,13 @@ class Updater
                 ]
             )->save();
         }
+        echo "Done\r\n";
     }
 
     public function populateSchedules()
     {
+        echo "Updating schedules...";
+
         $seasons = $this->iracing->series->seasons();
 
         foreach($seasons as $s)
@@ -69,13 +74,15 @@ class Updater
                     ]
                 )->save();
             }
-
             $this->deleteOldSeasonsForSeries($s->series_id);            
         }
+        echo "Done\r\n";
     }
 
     public function populateSeriesAssets()
     {
+        echo "Downloading series assets...";
+
         $assets = $this->iracing->series->assets();
 
         foreach($assets as $a)
@@ -83,10 +90,13 @@ class Updater
             $path = dirname(__FILE__, 3) . '/public/img/series/' . $a->series_id . '.png';
             $this->downloadImageIfDoesntExist('https://images-static.iracing.com/img/logos/series/' . $a->logo, $path);
         }
+        echo "Done\r\n";
     }
 
     public function populateMemberInfo()
     {
+        echo "Updating member info...";
+
         $ir = $sr = $lic = [];
         $info = $this->iracing->member->info();
         foreach($info->licenses as $l)
@@ -114,10 +124,13 @@ class Updater
                 $track_id = OwnedTrack::firstOrCreate(['item_id' => $id]);
             }
         }
+        echo "Done\r\n";
     }
 
     public function populateTracks()
     {
+        echo "Updating tracks...";
+
         $tracks = $this->iracing->track->get();
 
         foreach($tracks as $t)
@@ -137,10 +150,13 @@ class Updater
                 ]
             );
         }
+        echo "Done\r\n";
     }
 
     public function populateTracksAssets()
     {
+        echo "Downloading track assets...";
+
         $assets = $this->iracing->track->assets();
 
         foreach($assets as $a)
@@ -153,6 +169,7 @@ class Updater
             $this->downloadImageIfDoesntExist('https://images-static.iracing.com' . $a->logo, $logoPath);
             $this->downloadImageIfDoesntExist($a->track_map . $a->track_map_layers->active, $mapPath);
         }
+        echo "Done\r\n";
     }
 
     private function downloadImageIfDoesntExist($url, $path)

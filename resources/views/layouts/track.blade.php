@@ -5,7 +5,7 @@
      data-schedule-id="{{ $schedule->id }}"
      data-series-id="{{ $schedule->series_id }}"
      data-favorite="{{ $schedule->favorite }}">
-    <span class="track-name"><b>{{ $schedule->track_name }}</b> {{ $schedule->config_name }}</span>
+    <span class="track-name no-select"><b>{{ $schedule->track_name }}</b> {{ $schedule->config_name }}</span>
     <div class="track-week track-ownership no-select {{ ($ownership) ? 'track-ownership-green' : 'track-ownership-red' }}">{{ $schedule->race_week_num + 1 }}</div>
     <div class="track-logo" style="background: url('/img/tracks/logos/{{ $schedule->track_id }}.png') no-repeat;"></div>
     <div class="track-map" style="background: url('/img/tracks/maps/{{ $schedule->track_id }}.svg') no-repeat;"></div>
