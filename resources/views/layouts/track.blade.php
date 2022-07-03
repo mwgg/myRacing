@@ -1,7 +1,6 @@
 <div class="track-container {{ ($schedule->race_week_num < $schedule->current_week) ? 'track-past-week' : 'shadow' }}
     {{ ($inactive) ? 'track-container-inactive' : '' }}
-    {{ ($muteNonFavorite && !$schedule->favorite) ? 'track-past-week' : '' }}
-    {{ ($schedule->favorite && $schedule->race_week_num == $schedule->current_week) ? 'track-favorite' : '' }}"
+    {{ ($muteNonFavorite && !$schedule->favorite) ? 'track-past-week' : '' }}"
      style="background: linear-gradient( rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7) ), url('/img/tracks/images/{{ $schedule->track_id }}.jpg')"
      data-schedule-id="{{ $schedule->id }}"
      data-series-id="{{ $schedule->series_id }}"

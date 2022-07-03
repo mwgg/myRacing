@@ -18,7 +18,7 @@
     <nav class="shadow-lg sticky navbar navbar-expand-md navbar-dark bg-dark mb-4">
       <div class="container">
         <div class="ml-3">
-          <img src="/img/logo.png"/>
+          <a href="{{ route('dashboard') }}"><img src="/img/logo.png"/></a>
         </div>
         <div class="navbar">
           <ul class="navbar-nav me-auto mb-2 mb-md-0">

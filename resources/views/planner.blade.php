@@ -10,7 +10,7 @@
     @foreach($catSeries as $seriesId=>$s)
         <div class="card planner-card shadow" data-target="#planner-schedule-{{ $s[0]->series_id }}" data-series-id="{{ $s[0]->series_id }}">
             <div class="card-body position-relative">
-                <div class="series-eligibility position-absolute no-select iracing-icons {{ ($s[0]->eligible) ? 'text-success' : 'text-muted' }}">&#xE03A;</div>
+                <div class="series-eligibility position-absolute no-select iracing-icons {{ ($s[0]->eligible) ? 'text-success' : 'text-danger' }}">&#xE03A;</div>
                 <span class="no-select position-absolute license-badge badge badge-pill pill-cat-license {{Constants::LIC_CLASSES[$s[0]->license_group] }}">
                     <span class="category-icon iracing-icons">{!! Constants::CAT_ICONS[$s[0]->category_id] !!}</span>
                     <span class="series-license">{{ Constants::LIC_NAMES[$s[0]->license_group] }}</span>

@@ -28,18 +28,25 @@
 
 <div class="card mt-4">
     <div class="card-body">
-        <div class="calendar-container">
+        <div class="calendar">
             @if(count($schedules)===0)
                 <span>Nothing here, select what you are interested in on the <a href="{{ route('planner') }}">Planner</a> page</span>
             @endif
+    <div class="calendar-logos-container">
             @foreach($schedules as $seriesId=>$s)
-                <div class="position-relative calendar-series">
-                    <span class="series-logo-large series-logo calendar-series-logo" title="{{ $schedules[$seriesId][0]->series_name }}">
+                <div class="calendar-series">
+                    <div class="series-logo-large series-logo calendar-series-logo" title="{{ $schedules[$seriesId][0]->series_name }}">
                         <img src="/img/series/{{ $seriesId }}.png"/>
-                    </span>
+                    </div>
+                </div>
+            @endforeach
+    </div>
+    <div class="calendar-container inner-shadow">
+            @foreach($schedules as $seriesId=>$s)
+                <div class="calendar-series">
                     @foreach($schedules[$seriesId] as $schedule)
                         @if($schedule->race_week_num >= $schedule->current_week)
-                            <div class="calendar-week">
+                            <div class="calendar-week {{ ($schedule->current_week === $schedule->race_week_num) ? 'calendar-current-week' : '' }}">
                                 @include('layouts.track', [
                                     'schedule' => $schedule,
                                     'inactive' => true,
@@ -51,7 +58,8 @@
                     @endforeach
                 </div>
             @endforeach
-            <div class="mb-3"></div>
+            <div class="mb-1"></div>
+    </div>
         </div>
     </div>
 </div>

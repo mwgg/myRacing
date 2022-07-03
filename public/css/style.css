@@ -8,6 +8,11 @@
     -ms-user-select: none;      
     user-select: none;
 }
+.inner-shadow {
+    -moz-box-shadow:    inset 0 .5rem 1rem rgba(0,0,0,.15);
+    -webkit-box-shadow: inset 0 .5rem 1rem rgba(0,0,0,.15);
+    box-shadow:         inset 0 .5rem 1rem rgba(0,0,0,.15);
+}
 .table-borderless > tbody > tr > td,
 .table-borderless > tbody > tr > th,
 .table-borderless > tfoot > tr > td,
@@ -237,14 +242,13 @@ h1 {
 .calendar-container {
     overflow-x: scroll;
     white-space: nowrap;
+    padding: 10px;
 }
 .calendar-week {
     width: 277px;
     display: inline-block;
 }
 .calendar-series-logo {
-    margin-top: 20px;
-    float: left;
     width: 100px;
 }
 .inline-track-logo {
@@ -253,4 +257,29 @@ h1 {
     object-fit: scale-down;
     float: left;
     margin-right: 10px;
+}
+.calendar-logos-container {
+    width: 100px;
+    float: left;
+    margin-left: -5px;
+    padding: 10px;
+}
+.calendar-series {
+    height: 80px;
+    display: flex;
+    align-items: center;
+}
+.calendar-current-week {
+    margin-right: 15px;
+    margin-left: 10px;
+}
+.calendar-current-week .track-container {
+    border: 1px solid var(--bs-gray-500);
+    box-shadow: 0 .5rem 1rem var(--bs-gray-800) !important;
+}
+.calendar-current-week .track-past-week {
+    opacity: 0.3;
+}
+.calendar-current-week .track-past-week:hover {
+    opacity: 0.5;
 }

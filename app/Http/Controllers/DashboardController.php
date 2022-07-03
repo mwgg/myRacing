@@ -23,6 +23,7 @@ class DashboardController extends Controller
 
         $tracksToBuy = Schedule::distinct()
             ->select('schedules.track_id', 'tracks.name')
+            ->groupBy('tracks.name')
             ->where('favorite', true)
             ->where('current_week', '<=', 'race_week_num')
             ->whereNotIn('schedules.track_id', $ownedTracks)
