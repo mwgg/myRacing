@@ -36,13 +36,11 @@ class DashboardController extends Controller
             ->pluck('series_id')
             ->toArray();
 
-        //var_dump(json_encode($favSeriesIds));
-        //var_dump($tracksToBuy);
-
         $schedules = Schedule::orderBy('race_week_num')
             ->wherein('schedules.series_id', $favSeriesIds)
+            ->leftJoin('series_notes', 'schedules.series_id', '=', 'series_notes.series_id')
             ->join('series', 'schedules.series_id', '=', 'series.series_id')
-            ->select('schedules.*', 'series.name as series_name')
+            ->select('schedules.*', 'series_notes.note', 'series.name as series_name')
             ->get()
             ->groupBy('series_id');
 

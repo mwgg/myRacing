@@ -21,6 +21,13 @@
 .table-borderless > thead > tr > th {
     border: none;
 }
+.form-floating > label {
+    padding: 0.2rem 0.5rem;
+}
+.form-floating .form-control:not(:placeholder-shown) {
+    padding-top: 0.8rem;
+    padding-bottom: 0.625rem;
+}
 .text-muted {
     color: var(--bs-gray-800) !important;
   }
@@ -285,4 +292,11 @@ h1 {
 }
 .calendar-outer {
     margin-left: 95px;
+}
+.logo {
+    transition: 0.1s ease-in-out;
+}
+.logo:hover {
+    transition: 0.1s ease-in-out;
+    transform: rotate(-1deg) scale(1.05);
 }

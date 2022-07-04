@@ -17,7 +17,7 @@
     
     <nav class="shadow-lg sticky navbar navbar-expand-md navbar-dark bg-dark mb-4">
       <div class="container">
-        <div class="ml-3">
+        <div class="ml-3 logo">
           <a href="{{ route('dashboard') }}"><img src="/img/logo.png"/></a>
         </div>
         <div class="navbar">
@@ -41,6 +41,16 @@
 
       </div>
     </main>
+
+    <hr/>
+    <footer class="d-flex justify-content-center flex-nowrap mb-3">
+      <div>
+        <a href="https://github.com/mwgg/myRacing" target="_blank">GitHub</a>
+        <span>·</span>
+        <a href="{{ route('help') }}">Help</a>
+      </div>
+    </footer>
+
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ url('/js/myracing.js') }}"></script>
   </body>

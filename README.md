@@ -56,3 +56,9 @@ Add the following line to cron:
 ```
 
 Configure nginx as needed by pointing it at the `public` folder, and you're good to go.
+
+## Logging
+
+myRacing logs iRacing API updates to the `logs/updater.log` file.
+
+To change what is being logged, change the `LOG_LEVEL` variable in the `.env` file. Successful updates are logged as `debug` messages, updater exceptions as `error` messages.

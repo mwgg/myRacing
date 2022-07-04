@@ -35,7 +35,7 @@
             <div class="calendar-logos-container">
                 @foreach($schedules as $seriesId=>$s)
                     <div class="calendar-series">
-                        <div class="series-logo-large series-logo calendar-series-logo" title="{{ $schedules[$seriesId][0]->series_name }}">
+                        <div class="series-logo-large series-logo calendar-series-logo" title="{{ $schedules[$seriesId][0]->series_name }}&#10;&#10;{{ $schedules[$seriesId][0]->note }}">
                             <img src="/img/series/{{ $seriesId }}.png"/>
                         </div>
                     </div>

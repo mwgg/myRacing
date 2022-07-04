@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Log;
 use App\IracingData\Updater;
 
 class PopulateMember extends Command
@@ -28,7 +29,14 @@ class PopulateMember extends Command
      */
     public function handle()
     {
-        $updater = new Updater();
-        $updater->populateMemberInfo();
+        try
+        {
+            $updater = new Updater();
+            $updater->populateMemberInfo();
+        }
+        catch(iRacingPHP\Exceptions\iRacingException $e)
+        {
+            Log::channel('updater')->error('iRacing API error: ' . $e->getMessage());
+        }
     }
 }

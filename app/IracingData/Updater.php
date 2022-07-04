@@ -43,6 +43,7 @@ class Updater
             )->save();
         }
         echo "Done\r\n";
+        Log::channel('updater')->debug('Series updated.');
     }
 
     public function populateSchedules()
@@ -77,6 +78,7 @@ class Updater
             $this->deleteOldSeasonsForSeries($s->series_id);            
         }
         echo "Done\r\n";
+        Log::channel('updater')->debug('Schedules updated.');
     }
 
     public function populateSeriesAssets()
@@ -91,6 +93,7 @@ class Updater
             $this->downloadImageIfDoesntExist('https://images-static.iracing.com/img/logos/series/' . $a->logo, $path);
         }
         echo "Done\r\n";
+        Log::channel('updater')->debug('Series assets downloaded.');
     }
 
     public function populateMemberInfo()
@@ -125,6 +128,7 @@ class Updater
             }
         }
         echo "Done\r\n";
+        Log::channel('updater')->debug('Member info updated.');
     }
 
     public function populateTracks()
@@ -151,6 +155,7 @@ class Updater
             );
         }
         echo "Done\r\n";
+        Log::channel('updater')->debug('Tracks updated.');
     }
 
     public function populateTracksAssets()
@@ -170,6 +175,7 @@ class Updater
             $this->downloadImageIfDoesntExist($a->track_map . $a->track_map_layers->active, $mapPath);
         }
         echo "Done\r\n";
+        Log::channel('updater')->debug('Track assets downloaded.');
     }
 
     private function downloadImageIfDoesntExist($url, $path)

@@ -27,15 +27,20 @@
         </div>
 
         <div class="d-flex flex-wrap planner-hidden" id="planner-schedule-{{ $s[0]->series_id }}" data-bs-parent="#planner-accordion">
-            
-                @foreach($s as $schedule)
-                    @include('layouts.track', [
-                        'schedule' => $schedule,
-                        'inactive' => false,
-                        'muteNonFavorite' => false,
-                        'ownership' => in_array($schedule->track_id, $ownedTracks)
-                    ])
-                @endforeach
+            @foreach($s as $schedule)
+                @include('layouts.track', [
+                    'schedule' => $schedule,
+                    'inactive' => false,
+                    'muteNonFavorite' => false,
+                    'ownership' => in_array($schedule->track_id, $ownedTracks)
+                ])
+            @endforeach
+            <div class="d-flex justify-content-center flex-nowrap mt-2 mb-2 mx-auto">
+                <div class="form-floating">
+                    <textarea class="form-control series-notes" data-series-id="{{ $seriesId }}" placeholder="Leave your notes here" id="commentsTextarea" cols="70" rows="5">{{ $s[0]->note }}</textarea>
+                    <label for="commentsTextarea">Notes for {{ $s[0]->name }}</label>
+                </div>
+            </div>
         </div>
     @endforeach
 @endforeach

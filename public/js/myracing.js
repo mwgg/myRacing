@@ -36,6 +36,23 @@ function setFavoriteState(el, favorite)
     $(".planner-favorite-count[data-series-id='"+series_id+"']").html(series_fav_count);
 }
 
+function saveSeriesNote(el)
+{
+    var text = $(el).val();
+    var seriesId = $(el).data("series-id");
+
+    axios.post('/planner/savenote', {
+        series_id: seriesId,
+        note: text
+      })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+    });
+}
+
 $(function() {
 
     $(".planner-card[data-target]").each(function(){
@@ -56,6 +73,12 @@ $(function() {
                 var favorite = ($(this).data("favorite") == 1);
                 setFavorite($(this), $(this).data("schedule-id"), !favorite);
             }
+        });
+    });
+
+    $(".series-notes[data-series-id]").each(function(){
+        $(this).on("change", function(){
+            saveSeriesNote($(this));
         });
     });
 

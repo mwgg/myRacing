@@ -16,8 +16,8 @@ use App\Http\Controllers\PlannerController;
 */
 
 Route::get('/', [DashboardController::class, 'data'])->name('dashboard');
-
 Route::get('/planner', [PlannerController::class, 'data'])->name('planner');
-
+Route::view('/help', 'help')->name('help');
 
 Route::post('/planner/setfavorite', [PlannerController::class, 'setFavorite']);
+Route::post('/planner/savenote', [PlannerController::class, 'saveNote']);

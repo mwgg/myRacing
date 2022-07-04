@@ -7,6 +7,7 @@ use App\IracingData\Constants;
 use App\IracingData\Processors;
 use App\Models\Schedule;
 use App\Models\Series;
+use App\Models\SeriesNote;
 use App\Models\OwnedTrack;
 use Illuminate\Support\Facades\DB;
 
@@ -17,6 +18,7 @@ class PlannerController extends Controller
 
         $series = Series::orderBy('category_id')
             ->orderBy('name')
+            ->leftJoin('series_notes', 'series.series_id', '=', 'series_notes.series_id')
             ->leftJoin('schedules', 'series.series_id', '=', 'schedules.series_id')
             ->orderBy('race_week_num')
             ->get()
@@ -42,5 +44,18 @@ class PlannerController extends Controller
         }
         
         return response()->json('{success: false}');
+    }
+
+    public function saveNote(Request $request)
+    {
+        $note = SeriesNote::updateOrCreate(
+            ['series_id' => $request->series_id],
+            [
+                'series_id' => $request->series_id,
+                'note' => $request->note
+            ]
+        )->save();
+        
+        return response()->json('{success: true}');
     }
 }

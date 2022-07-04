@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Log;
 use App\IracingData\Updater;
 
 class PopulateData extends Command
@@ -28,9 +29,16 @@ class PopulateData extends Command
      */
     public function handle()
     {
-        $updater = new Updater();
-        $updater->populateSeries();
-        $updater->populateSchedules();
-        $updater->populateTracks();
+        try
+        {
+            $updater = new Updater();
+            $updater->populateSeries();
+            $updater->populateSchedules();
+            $updater->populateTracks();
+        }
+        catch(iRacingPHP\Exceptions\iRacingException $e)
+        {
+            Log::channel('updater')->error('iRacing exception: ' . $e->getMessage());
+        }
     }
 }
