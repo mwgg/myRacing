@@ -3,6 +3,7 @@
 namespace App\IracingData;
 
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use iRacingPHP\iRacing;
 use App\Models\Series;
 use App\Models\Schedule;
