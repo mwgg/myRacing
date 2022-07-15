@@ -18,7 +18,6 @@ return new class extends Migration
             $table->integer('series_id');
             $table->text('note');
             $table->timestamps();
-
             $table->unique('series_id');
         });
     }

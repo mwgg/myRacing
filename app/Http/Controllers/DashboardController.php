@@ -6,10 +6,8 @@ use Illuminate\Http\Request;
 use App\IracingData\Constants;
 use App\IracingData\Processors;
 use App\Models\Member;
-use App\Models\Series;
 use App\Models\Schedule;
 use App\Models\OwnedTrack;
-use App\Models\Track;
 
 class DashboardController extends Controller
 {
@@ -41,6 +39,8 @@ class DashboardController extends Controller
             ->leftJoin('series_notes', 'schedules.series_id', '=', 'series_notes.series_id')
             ->join('series', 'schedules.series_id', '=', 'series.series_id')
             ->select('schedules.*', 'series_notes.note', 'series.name as series_name')
+            ->orderBy('series.category_id')
+            ->orderBy('series.name')
             ->get()
             ->groupBy('series_id');
 

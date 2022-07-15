@@ -23,6 +23,7 @@
 }
 .form-floating > label {
     padding: 0.2rem 0.5rem;
+    color: var(--bs-gray-700);
 }
 .form-floating .form-control:not(:placeholder-shown) {
     padding-top: 0.8rem;
@@ -276,7 +277,7 @@ h1 {
     display: flex;
     align-items: center;
 }
-.calendar-current-week {
+.calendar-week.calendar-current-week {
     margin-right: 15px;
     margin-left: 10px;
 }

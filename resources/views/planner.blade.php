@@ -28,12 +28,14 @@
 
         <div class="d-flex flex-wrap planner-hidden" id="planner-schedule-{{ $s[0]->series_id }}" data-bs-parent="#planner-accordion">
             @foreach($s as $schedule)
+                <div class="{{ ($schedule->current_week === $schedule->race_week_num) ? 'calendar-current-week' : '' }}">
                 @include('layouts.track', [
                     'schedule' => $schedule,
                     'inactive' => false,
                     'muteNonFavorite' => false,
                     'ownership' => in_array($schedule->track_id, $ownedTracks)
                 ])
+                </div>
             @endforeach
             <div class="d-flex justify-content-center flex-nowrap mt-2 mb-2 mx-auto">
                 <div class="form-floating">
