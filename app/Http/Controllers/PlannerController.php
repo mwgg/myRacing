@@ -48,13 +48,22 @@ class PlannerController extends Controller
 
     public function saveNote(Request $request)
     {
-        $note = SeriesNote::updateOrCreate(
-            ['series_id' => $request->series_id],
-            [
-                'series_id' => $request->series_id,
-                'note' => $request->note
-            ]
-        )->save();
+        if(strlen(trim($request->note)) > 0)
+        {
+            $note = SeriesNote::updateOrCreate(
+                ['series_id' => $request->series_id],
+                [
+                    'series_id' => $request->series_id,
+                    'note' => $request->note
+                ]
+            )->save();
+        }
+        else
+        {
+            $deleted = DB::table('series_notes')
+            ->where('series_id', $request->series_id)
+            ->delete();
+        }
         
         return response()->json('{success: true}');
     }

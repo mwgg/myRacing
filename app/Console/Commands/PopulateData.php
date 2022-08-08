@@ -36,7 +36,7 @@ class PopulateData extends Command
             $updater->populateSchedules();
             $updater->populateTracks();
         }
-        catch(iRacingPHP\Exceptions\iRacingException $e)
+        catch(\iRacingPHP\Exceptions\iRacingException $e)
         {
             Log::channel('updater')->error('iRacing exception: ' . $e->getMessage());
         }

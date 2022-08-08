@@ -76,8 +76,9 @@ class Updater
                     ]
                 )->save();
             }
-            $this->deleteOldSeasonsForSeries($s->series_id);            
+            $this->deleteOldSeasonsForSeries($s->series_id);
         }
+        $this->unfavoritePastWeeks();
         echo "Done\r\n";
         Log::channel('updater')->debug('Schedules updated.');
     }
@@ -203,6 +204,13 @@ class Updater
             ->where('season_year', '!=', $latestValues[0])
             ->where('season_quarter', '!=', $latestValues[1])
             ->delete();
+    }
+
+    private function unfavoritePastWeeks()
+    {
+        Schedule::where('favorite', true)
+            ->whereRaw('race_week_num < current_week')
+            ->update(['favorite' => false]);
     }
 
 }

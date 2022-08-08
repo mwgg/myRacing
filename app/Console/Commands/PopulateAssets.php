@@ -35,7 +35,7 @@ class PopulateAssets extends Command
             $updater->populateSeriesAssets();
             $updater->populateTracksAssets();
         }
-        catch(iRacingPHP\Exceptions\iRacingException $e)
+        catch(\iRacingPHP\Exceptions\iRacingException $e)
         {
             Log::channel('updater')->error('iRacing exception: ' . $e->getMessage());
         }

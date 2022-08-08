@@ -34,7 +34,7 @@ class PopulateMember extends Command
             $updater = new Updater();
             $updater->populateMemberInfo();
         }
-        catch(iRacingPHP\Exceptions\iRacingException $e)
+        catch(\iRacingPHP\Exceptions\iRacingException $e)
         {
             Log::channel('updater')->error('iRacing API error: ' . $e->getMessage());
         }
