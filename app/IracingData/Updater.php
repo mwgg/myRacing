@@ -74,14 +74,14 @@ class Updater
             }
         }
 
-        $latestQuarters = Schedule::select(DB::raw('max(season_quarter)'))
+        $latestQuarters = Schedule::select(DB::raw('series_id, max(season_quarter) as max'))
             ->groupBy('series_id')
             ->get()
             ->toArray();
 
         $this->deleteOldSeasonsForSeries($latestQuarters);
-
         $this->unfavoritePastWeeks();
+
         echo "Done\r\n";
         Log::channel('updater')->debug('Schedules updated.');
     }
@@ -196,10 +196,10 @@ class Updater
 
     private function deleteOldSeasonsForSeries(array $latestQuarters)
     {
-        foreach($latestQuarters as $seriesId => $quarter)
+        foreach($latestQuarters as $quarter)
         {
             $deleted = DB::table('schedules')
-                ->whereRaw('series_id == '.$seriesId.' AND season_quarter != '.$quarter["max(season_quarter)"])
+                ->whereRaw('series_id == '.$quarter['series_id'].' AND season_quarter != '.$quarter['max'])
                 ->delete();
         }
     }
