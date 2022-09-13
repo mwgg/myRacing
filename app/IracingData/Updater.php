@@ -7,13 +7,9 @@ use Illuminate\Support\Facades\Log;
 use iRacingPHP\iRacing;
 use App\Models\Series;
 use App\Models\Schedule;
-use App\Models\SeriesAssets;
 use App\Models\Member;
-use App\Models\OwnedCar;
 use App\Models\OwnedTrack;
 use App\Models\Track;
-use App\Models\TrackAssets;
-use App\Models\SeriesSeason;
 
 class Updater
 {
@@ -76,8 +72,15 @@ class Updater
                     ]
                 )->save();
             }
-            $this->deleteOldSeasonsForSeries($s->series_id);
         }
+
+        $latestQuarters = Schedule::select(DB::raw('max(season_quarter)'))
+            ->groupBy('series_id')
+            ->get()
+            ->toArray();
+
+        $this->deleteOldSeasonsForSeries($latestQuarters);
+
         $this->unfavoritePastWeeks();
         echo "Done\r\n";
         Log::channel('updater')->debug('Schedules updated.');
@@ -191,19 +194,14 @@ class Updater
         }
     }
 
-    private function deleteOldSeasonsForSeries(int $seriesId)
+    private function deleteOldSeasonsForSeries(array $latestQuarters)
     {
-        $latest = Schedule::select(DB::raw('max(season_year + season_quarter*0.1)'))
-        ->where('series_id', $seriesId)
-        ->first()
-        ->toArray();
-
-        $latestValues = explode('.', array_values($latest)[0]);
-
-        $deleted = DB::table('schedules')
-            ->where('season_year', '!=', $latestValues[0])
-            ->where('season_quarter', '!=', $latestValues[1])
-            ->delete();
+        foreach($latestQuarters as $seriesId => $quarter)
+        {
+            $deleted = DB::table('schedules')
+                ->whereRaw('series_id == '.$seriesId.' AND season_quarter != '.$quarter["max(season_quarter)"])
+                ->delete();
+        }
     }
 
     private function unfavoritePastWeeks()
