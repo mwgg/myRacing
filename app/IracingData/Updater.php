@@ -74,7 +74,7 @@ class Updater
             }
         }
 
-        $latestQuarters = Schedule::select(DB::raw('series_id, max(season_quarter) as max'))
+        $latestQuarters = Schedule::select(DB::raw('series_id, max(season_year + season_quarter*0.1) as max'))
             ->groupBy('series_id')
             ->get()
             ->toArray();
@@ -198,8 +198,9 @@ class Updater
     {
         foreach($latestQuarters as $quarter)
         {
+            $year = explode('.', $quarter['max'])[1];
             $deleted = DB::table('schedules')
-                ->whereRaw('series_id == '.$quarter['series_id'].' AND season_quarter != '.$quarter['max'])
+                ->whereRaw('series_id == '.$quarter['series_id'].' AND season_quarter != '.$year)
                 ->delete();
         }
     }
