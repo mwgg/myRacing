@@ -1,6 +1,8 @@
 # myRacing
 Self-hosted iRacing dashboard and season planner.
 
+This version of myRacing is no longer maintainted, it has been superceded by a [new version](https://github.com/mwgg/myRacing_v2), which features client-side data storage, does not require end-user iRacing credentials, and is hosted as a public website. All development efforts will be focused on the new version.
+
 ![Dashboard](https://github.com/mwgg/myRacing/raw/main/myracing_1.png)
 ![Planner](https://github.com/mwgg/myRacing/raw/main/myracing_2.png)
 
